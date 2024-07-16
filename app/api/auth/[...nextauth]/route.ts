@@ -6,7 +6,7 @@ import { connectDatabase } from "@/lib/mongoose";
 import User from "@/models/user-model";
 import { AuthOptions } from "next-auth";
 
-export const authOptions:AuthOptions = {
+const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -58,5 +58,6 @@ export const authOptions:AuthOptions = {
   secret: process.env.SECRET_KEY,
 };
 
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+export default authOptions
