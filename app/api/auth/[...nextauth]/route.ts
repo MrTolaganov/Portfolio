@@ -1,12 +1,12 @@
-import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDatabase } from "@/lib/mongoose";
 import User from "@/models/user-model";
+import { AuthOptions } from "next-auth";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions:AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
