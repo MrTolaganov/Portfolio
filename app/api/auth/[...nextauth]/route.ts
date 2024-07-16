@@ -5,8 +5,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDatabase } from "@/lib/mongoose";
 import User from "@/models/user-model";
 import { AuthOptions } from "next-auth";
+import { NextApiHandler } from "next";
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -58,6 +59,5 @@ const authOptions: AuthOptions = {
   secret: process.env.SECRET_KEY,
 };
 
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
-export default authOptions
+const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
+export { authHandler as GET, authHandler as POST };
