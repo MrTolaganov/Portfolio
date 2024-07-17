@@ -32,6 +32,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function DashboardPage() {
   const [allUsers, setAllUsers] = useState<UserType[]>([]);
@@ -174,8 +175,9 @@ export default function DashboardPage() {
           {isLoading &&
             users.map(user => (
               <TableRow key={user._id}>
-                <TableCell>
-                  <Skeleton className="w-48 h-4" />
+                <TableCell className="flex items-center gap-x-2">
+                  <Skeleton className="w-8 h-8 rounded-full" />
+                  <Skeleton className="w-40 h-4" />
                 </TableCell>
                 <TableCell>
                   <Skeleton className="w-32 h-4" />
@@ -204,7 +206,13 @@ export default function DashboardPage() {
               .reverse()
               .map(user => (
                 <TableRow key={user._id}>
-                  <TableCell>@{user.username}</TableCell>
+                  <TableCell className="flex items-center gap-x-2">
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src={user.image} />
+                      <AvatarFallback>{user.username?.at(0)?.toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                    @{user.username}
+                  </TableCell>
                   <TableCell className="min-w-32">
                     {format(user.createdAt!, "MMM dd, yyyy")}
                   </TableCell>
@@ -228,7 +236,7 @@ export default function DashboardPage() {
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button className="text-red-500" size={"sm"} variant={"outline"}>
-                          Delete
+                          Delete user
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>

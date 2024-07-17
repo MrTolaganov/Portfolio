@@ -12,6 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
+import { Skeleton } from "../ui/skeleton";
 
 export default function Navbar() {
   const [openSheet, setOpenSheet] = useState(false);
@@ -51,7 +52,7 @@ export default function Navbar() {
         </ul>
         <span className="flex items-center gap-4">
           <ModeToggle />
-          {session && (
+          {session ? (
             <Popover>
               <PopoverTrigger>
                 <Avatar className="w-8 h-8 cursor-pointer">
@@ -77,7 +78,7 @@ export default function Navbar() {
                 </div>
               </PopoverContent>
             </Popover>
-          )}
+          ):<Skeleton className="w-8 h-8 rounded-full"/>}
           <AlignJustify
             className="block md:hidden cursor-pointer"
             onClick={() => setOpenSheet(true)}

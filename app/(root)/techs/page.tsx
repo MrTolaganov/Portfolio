@@ -10,6 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -173,11 +174,14 @@ export default function TechsPage() {
               className="w-9/12"
             >
               <CarouselContent>
-                {techs.map(tech => (
+                {techs.map((tech, idx) => (
                   <CarouselItem key={tech._id} className={`md:basis-1/3`}>
                     <div className="p-1 border-black">
                       <Card className="border-4 border-black dark:border-white">
                         <CardContent className="flex aspect-square items-center justify-center p-6 relative bg-white ">
+                          <Badge className="absolute z-50 top-0 right-0 bg-black/50 text-white m-1 md:hidden" >
+                            {idx + 1} / {techs.length}
+                          </Badge>
                           <Image src={tech.image} alt={tech.label} fill className="object-cover" />
                         </CardContent>
                         <div className="flex justify-between px-2 py-1 border-t-2 border-black items-center">
@@ -226,26 +230,9 @@ export default function TechsPage() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div onClick={() => setStep(step => step - 1)}>
-                <CarouselPrevious />
-              </div>
-              <div onClick={() => setStep(step => step + 1)}>
-                <CarouselNext />
-              </div>
+              <CarouselPrevious />
+              <CarouselNext />
             </Carousel>
-            <div className="flex gap-2 mt-[-8px]">
-              {techs.map((_, index) => (
-                <span
-                  key={index}
-                  className={cn(
-                    "text-4xl  block md:hidden text-muted-foreground",
-                    step === index && "text-black dark:text-white"
-                  )}
-                >
-                  .
-                </span>
-              ))}
-            </div>
           </>
         )}
         {!isLoading && techs.length === 0 && <span>No techs found</span>}

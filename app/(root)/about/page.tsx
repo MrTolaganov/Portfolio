@@ -1,5 +1,6 @@
 "use client";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { useSession } from "next-auth/react";
 
 export default function AboutPage() {
