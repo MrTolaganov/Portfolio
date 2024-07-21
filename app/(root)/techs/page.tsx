@@ -109,10 +109,10 @@ export default function TechsPage() {
   };
 
   useEffect(() => {
+    getTechs();
     setTimeout(() => {
-      getTechs();
+      setIsLoading(false);
     }, 2000);
-    setIsLoading(false);
   }, []);
 
   useEffect(() => {

@@ -134,10 +134,10 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
+    getUsers();
     setTimeout(() => {
-      getUsers();
+      setIsLoading(false);
     }, 2000);
-    setIsLoading(false);
   }, []);
 
   useEffect(() => {
