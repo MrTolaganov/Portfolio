@@ -2,7 +2,7 @@ import { NavItemType } from "@/types";
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: process.env.NODE_ENV === "development" ? process.env.DEV_URL : process.env.PRO_URL,
 });
 
 export const navItems: NavItemType[] = [
