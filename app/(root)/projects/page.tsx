@@ -140,8 +140,10 @@ export default function ProjectsPage() {
   };
 
   useEffect(() => {
-    getProjects();
-      setIsLoading(false);
+    setTimeout(() => {
+      getProjects();
+    }, 2000);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {

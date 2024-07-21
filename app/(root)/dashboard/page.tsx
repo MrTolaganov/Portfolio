@@ -134,7 +134,9 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    getUsers();
+    setTimeout(() => {
+      getUsers();
+    }, 2000);
     setIsLoading(false);
   }, []);
 
