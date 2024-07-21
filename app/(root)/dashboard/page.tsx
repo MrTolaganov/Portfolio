@@ -135,9 +135,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     getUsers();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {

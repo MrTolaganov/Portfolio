@@ -109,9 +109,7 @@ export default function TechsPage() {
       }
     };
     getTechs();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -179,7 +177,7 @@ export default function TechsPage() {
                     <div className="p-1 border-black">
                       <Card className="border-4 border-black dark:border-white">
                         <CardContent className="flex aspect-square items-center justify-center p-6 relative bg-white ">
-                          <Badge className="absolute z-50 top-0 right-0 bg-black/50 text-white m-1 md:hidden" >
+                          <Badge className="absolute z-50 top-0 right-0 bg-black/50 text-white m-1 md:hidden">
                             {idx + 1} / {techs.length}
                           </Badge>
                           <Image src={tech.image} alt={tech.label} fill className="object-cover" />
