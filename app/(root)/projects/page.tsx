@@ -23,11 +23,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { api } from "@/constants";
 import getTechs from "@/lib/getTechs";
 import { projectSchema } from "@/lib/validation";
 import { ProjectType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -67,7 +67,7 @@ export default function ProjectsPage() {
     try {
       const { title, techs, image, browserUrl, githubUrl } = values;
       if (state === "add") {
-        const { data: project } = await axios.post("/api/project/post", {
+        const { data: project } = await api.post("/api/project/post", {
           title,
           techs,
           image,
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
         });
         setProjects([...projects, project.data]);
       } else {
-        const { data: project } = await axios.put(`/api/project/put/${id}`, {
+        const { data: project } = await api.put(`/api/project/put/${id}`, {
           title,
           techs,
           image,
@@ -106,7 +106,7 @@ export default function ProjectsPage() {
 
   const onDeleteTech = async (id: string) => {
     try {
-      await axios.delete(`/api/project/delete/${id}`);
+      await api.delete(`/api/project/delete/${id}`);
       setProjects(projects => projects.filter(project => project._id !== id));
       router.refresh();
     } catch (error) {
@@ -131,7 +131,7 @@ export default function ProjectsPage() {
 
   const getProjects = async () => {
     try {
-      const { data: projects } = await axios.get("/api/project/get");
+      const { data: projects } = await api.get("/api/project/get");
       setProjects(projects.data);
       setAllProjects(projects.data);
     } catch (error) {
@@ -149,7 +149,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const getProject = async (id: string) => {
       try {
-        const { data: project } = await axios.get(`/api/project/get/${id}`);
+        const { data: project } = await api.get(`/api/project/get/${id}`);
         form.reset({
           title: project.data.title!,
           techs: project.data.techs!,
