@@ -32,7 +32,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { api } from "@/constants";
+import axios from "axios";
 
 export default function DashboardPage() {
   const [allUsers, setAllUsers] = useState<UserType[]>([]);
@@ -47,7 +47,7 @@ export default function DashboardPage() {
 
   const getUsers = async () => {
     try {
-      const { data: users } = await api.get("/api/user/get");
+      const { data: users } = await axios.get("/api/user/get");
       setAllUsers(users.data);
       setUsers(users.data);
     } catch (error) {
@@ -57,7 +57,7 @@ export default function DashboardPage() {
 
   const getUser = async (id: string) => {
     try {
-      const { data: user } = await api.get(`/api/user/get/${id}`);
+      const { data: user } = await axios.get(`/api/user/get/${id}`);
       setState({ comment: user.data.comment, rating: user.data.rating });
       isCommented.current = user.data.comment ? true : false;
     } catch (error) {
@@ -87,7 +87,7 @@ export default function DashboardPage() {
 
   const onDeleteUser = async (id: string) => {
     try {
-      await api.delete(`/api/user/delete/${id}`);
+      await axios.delete(`/api/user/delete/${id}`);
       setUsers(users => users.filter(user => user._id !== id));
       setAllUsers(users => users.filter(user => user._id !== id));
     } catch (error) {
@@ -119,7 +119,7 @@ export default function DashboardPage() {
       });
       return;
     } else {
-      const { data: user } = await api.put(`/api/user/put/${id}`, state);
+      const { data: user } = await axios.put(`/api/user/put/${id}`, state);
       setUsers(users => users.map(u => (u._id === user.data._id ? user.data : u)));
       setAllUsers(users => users.map(u => (u._id === user.data._id ? user.data : u)));
       toast({

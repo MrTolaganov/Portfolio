@@ -12,7 +12,7 @@ import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { CommentType, UserType } from "@/types";
 import { useSession } from "next-auth/react";
 import { toast } from "@/components/ui/use-toast";
-import { api } from "@/constants";
+import axios from "axios";
 
 export default function ContactPage() {
   const [state, setState] = useState<CommentType>({ comment: "", rating: 0.0 });
@@ -43,7 +43,7 @@ export default function ContactPage() {
       });
       return;
     } else {
-      await api.put(`/api/user/put/${session?.currentUser._id}`, state);
+      await axios.put(`/api/user/put/${session?.currentUser._id}`, state);
       toast({
         description: `Comment and rating ${
           !isCommented ? "added" : "edited"
@@ -56,7 +56,7 @@ export default function ContactPage() {
 
   const getCommentByUserId = async () => {
     try {
-      const { data: comment } = await api.get(`/api/user/get/${session?.currentUser._id}`);
+      const { data: comment } = await axios.get(`/api/user/get/${session?.currentUser._id}`);
       isCommented = comment.data.comment ? true : false;
     } catch (error) {
       console.log(error);

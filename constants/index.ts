@@ -1,9 +1,6 @@
 import { NavItemType } from "@/types";
 import axios from "axios";
 
-export const api = axios.create({
-  baseURL: process.env.NODE_ENV === "development" ? process.env.DEV_URL : process.env.PRO_URL,
-});
 
 export const navItems: NavItemType[] = [
   { path: "/", label: "Home" },

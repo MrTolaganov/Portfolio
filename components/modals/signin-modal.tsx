@@ -15,7 +15,7 @@ import useSignupModal from "@/hooks/useSignupModal";
 import { useAuthType } from "@/hooks/useAuthType";
 import { signIn } from "next-auth/react";
 import { useToast } from "../ui/use-toast";
-import { api } from "@/constants";
+import axios from "axios";
 
 export default function SigninModal() {
   const { isOpen, onClose } = useSigninModal();
@@ -33,7 +33,7 @@ export default function SigninModal() {
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
     try {
       const { email, password } = values;
-      const { data: user } = await api.post("/api/auth/signin", { email, password });
+      const { data: user } = await axios.post("/api/auth/signin", { email, password });
 
       if (user.data) {
         signIn("credentials", { email, password });

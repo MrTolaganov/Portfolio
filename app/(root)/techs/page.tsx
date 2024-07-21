@@ -31,11 +31,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { api } from "@/constants";
-import { cn } from "@/lib/utils";
 import { techSchema } from "@/lib/validation";
 import { TechType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -64,10 +63,10 @@ export default function TechsPage() {
     try {
       const { label, category, image } = values;
       if (state === "add") {
-        const { data: tech } = await api.post("/api/tech/post", { label, category, image });
+        const { data: tech } = await axios.post("/api/tech/post", { label, category, image });
         setTechs([...techs, tech.data]);
       } else {
-        const { data: tech } = await api.put(`/api/tech/put/${id}`, { label, category, image });
+        const { data: tech } = await axios.put(`/api/tech/put/${id}`, { label, category, image });
         setTechs(techs => techs.map(t => (t._id === tech.data._id ? tech.data : t)));
       }
       setOpen(false);
@@ -91,7 +90,7 @@ export default function TechsPage() {
 
   const onDeleteTech = async (id: string) => {
     try {
-      await api.delete(`/api/tech/delete/${id}`);
+      await axios.delete(`/api/tech/delete/${id}`);
       setTechs(techs => techs.filter(tech => tech._id !== id));
       router.refresh();
     } catch (error) {
@@ -101,7 +100,7 @@ export default function TechsPage() {
 
   const getTechs = async () => {
     try {
-      const { data: techs } = await api.get("/api/tech/get");
+      const { data: techs } = await axios.get("/api/tech/get");
       setTechs(techs.data);
     } catch (error) {
       console.error(error);
@@ -117,7 +116,7 @@ export default function TechsPage() {
 
   useEffect(() => {
     const getTech = async (id: string) => {
-      const { data: tech } = await api.get(`/api/tech/get/${id}`);
+      const { data: tech } = await axios.get(`/api/tech/get/${id}`);
       form.reset({
         label: tech.data.label!,
         category: tech.data.category!,
