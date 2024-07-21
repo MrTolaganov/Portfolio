@@ -102,7 +102,7 @@ export default function TechsPage() {
   useEffect(() => {
     const getTechs = async () => {
       try {
-        const { data: techs } = await axios.get("api/tech/get");
+        const { data: techs } = await axios.get("/api/tech/get");
         setTechs(techs.data);
       } catch (error) {
         console.error(error);
