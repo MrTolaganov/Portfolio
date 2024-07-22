@@ -28,23 +28,23 @@ const nextConfig = {
   //     },
   //   ];
   // },
-  async redirects() {
-    return [
-      // if the header `x-redirect-me` is present,
-      // this redirect will be applied
-      {
-        source: "/:path((?!another-page$).*)",
-        has: [
-          {
-            type: "header",
-            key: "x-redirect-me",
-          },
-        ],
-        permanent: false,
-        destination: "/another-page",
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     // if the header `x-redirect-me` is present,
+  //     // this redirect will be applied
+  //     {
+  //       source: "/:path((?!another-page$).*)",
+  //       has: [
+  //         {
+  //           type: "header",
+  //           key: "x-redirect-me",
+  //         },
+  //       ],
+  //       permanent: false,
+  //       destination: "/another-page",
+  //     },
+  //   ];
+  // },
   images: {
     remotePatterns: [
       { protocol: "http", hostname: "*" },
