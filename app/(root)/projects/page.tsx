@@ -136,14 +136,13 @@ export default function ProjectsPage() {
       setAllProjects(projects.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getProjects();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
   }, []);
 
   useEffect(() => {
@@ -186,30 +185,26 @@ export default function ProjectsPage() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4">
         {isLoading &&
-          projects
-            .slice()
-            .reverse()
-            .map(project => (
-              <Card key={project._id} className="h-76">
-                <Skeleton className="w-full h-40" />
-                <div className="flex flex-col justify-between p-2 h-36">
-                  <Skeleton className="w-2/3 h-6" />
-                  <div className="flex flex-wrap items-center gap-2">
-                    {getTechs(project.techs).map((_, idx) => (
-                      <Skeleton key={idx} className="w-1/6 h-4" />
-                    ))}
-                  </div>
-                  <Skeleton className="w-full h-8" />
+          Array.from({ length: 12 }).map((_, idx) => (
+            <Card key={idx} className="h-76">
+              <Skeleton className="w-full h-40" />
+              <div className="flex flex-col justify-between p-2 h-36">
+                <Skeleton className="w-2/3 h-6" />
+                <div className="flex flex-wrap items-center gap-2">
+                  {Array.from({ length: 8 }).map((_, idx) => (
+                    <Skeleton key={idx} className="w-1/5 h-4" />
+                  ))}
                 </div>
-                {session?.currentUser.isAdmin && (
-                  <div className="flex items-center border-t-2 px-2 py-1 gap-x-2">
-                    <Skeleton className="w-1/2 h-8" />
-                    <Skeleton className="w-1/2 h-8" />
-                  </div>
-                )}
-              </Card>
-            ))}
-
+                <Skeleton className="w-full h-8" />
+              </div>
+              {session?.currentUser.isAdmin && (
+                <div className="flex items-center border-t-2 px-2 py-1 gap-x-2">
+                  <Skeleton className="w-1/2 h-8" />
+                  <Skeleton className="w-1/2 h-8" />
+                </div>
+              )}
+            </Card>
+          ))}
         {!isLoading &&
           projects.length > 0 &&
           projects

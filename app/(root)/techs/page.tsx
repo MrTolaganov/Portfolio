@@ -104,14 +104,13 @@ export default function TechsPage() {
       setTechs(techs.data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getTechs();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
   }, []);
 
   useEffect(() => {
@@ -137,8 +136,8 @@ export default function TechsPage() {
             className="w-9/12"
           >
             <CarouselContent>
-              {techs.map(tech => (
-                <CarouselItem key={tech._id} className={`md:basis-1/3`}>
+              {Array.from({ length: 11 }).map((_, idx) => (
+                <CarouselItem key={idx} className={`md:basis-1/3`}>
                   <div className="p-1 border-black">
                     <Card className="border-black dark:border-white">
                       <Skeleton className="w-full h-60 md:h-72" />

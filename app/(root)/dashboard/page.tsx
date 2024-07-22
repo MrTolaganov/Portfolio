@@ -52,6 +52,8 @@ export default function DashboardPage() {
       setUsers(users.data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -135,9 +137,6 @@ export default function DashboardPage() {
 
   useEffect(() => {
     getUsers();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
   }, []);
 
   useEffect(() => {
@@ -173,8 +172,8 @@ export default function DashboardPage() {
         </TableHeader>
         <TableBody>
           {isLoading &&
-            users.map(user => (
-              <TableRow key={user._id}>
+            Array.from({length:6}).map((_, idx) => (
+              <TableRow key={idx}>
                 <TableCell className="flex items-center gap-x-2">
                   <Skeleton className="w-8 h-8 rounded-full" />
                   <Skeleton className="w-40 h-4" />
