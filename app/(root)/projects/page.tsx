@@ -175,7 +175,7 @@ export default function ProjectsPage() {
             value={value}
             onChange={e => onSearchHandler(e.target.value!)}
           />
-          <FaSearch className="w-6 h-6 ml-[-28px] z-50 hover:cursor-pointer" onClick={onFocus} />
+          <FaSearch className="w-6 h-6 ml-[-28px] z-40 hover:cursor-pointer" onClick={onFocus} />
         </div>
         {session?.currentUser.isAdmin && (
           <Button className="w-full md:w-auto" onClick={onAddProject}>

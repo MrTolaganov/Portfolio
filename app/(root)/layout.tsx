@@ -10,7 +10,7 @@ export default async function RootLayout({ children }: ChildProps) {
   return (
     <section className="container relative">
       <Navbar />
-      <main>{session?.currentUser ? children : <Auth />}</main>
+      <main className="mt-[10vh]">{session?.currentUser ? children : <Auth />}</main>
     </section>
   );
 }
