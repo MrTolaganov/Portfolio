@@ -155,7 +155,7 @@ export default function DashboardPage() {
           value={value}
           onChange={e => onSearchHandler(e.target.value!)}
         />
-        <FaSearch className="w-6 h-6 ml-[-28px] z-50 hover:cursor-pointer" onClick={onFocus} />
+        <FaSearch className="w-6 h-6 ml-[-28px] z-30 hover:cursor-pointer" onClick={onFocus} />
       </div>
       <Table>
         <TableHeader>

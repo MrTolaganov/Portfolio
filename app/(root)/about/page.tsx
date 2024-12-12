@@ -18,7 +18,7 @@ export default function AboutPage() {
           : session?.user.name.split(" ").at(0)}
         , I'm nice to meet you. As I itroduce myself for you, so my fullname is Otabek Tulaganov. I
         was born on March 24, 2004. I'm from Uzbekistan. I have benn studying in Tashkent University
-        of Inpformation Technolgies since 2022. I have over half year web development experience.
+        of Inpformation Technolgies since 2022. I have over a year web development experience.
         I'm interested in building and deploying large scalable, optimizing performance both
         frontend and backend that is full stack web applications.
       </p>
