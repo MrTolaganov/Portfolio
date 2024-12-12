@@ -47,13 +47,13 @@ export const techs = [
   },
   {
     index: 4,
-    url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_VGJKktgpOopxJ5E9FCtFTqRNz84imhXeA&s',
+    url: 'https://cdn.creazilla.com/icons/3218666/reactjs-icon-md.png',
     label: 'ReactJS',
     category: 'frontend',
   },
   {
     index: 5,
-    url: 'https://static-00.iconduck.com/assets.00/nextjs-icon-512x512-11yvtwzn.png',
+    url: 'https://img.icons8.com/fluent-systems-regular/200/nextjs.png',
     label: 'NextJS',
     category: 'fullstack',
   },

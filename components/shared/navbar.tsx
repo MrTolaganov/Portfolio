@@ -13,6 +13,7 @@ import { Button } from '../ui/button'
 import { useState } from 'react'
 import { signOut } from 'next-auth/react'
 import { Skeleton } from '../ui/skeleton'
+import { DialogTitle } from '../ui/dialog'
 
 export default function Navbar() {
   const [openSheet, setOpenSheet] = useState(false)
@@ -90,14 +91,12 @@ export default function Navbar() {
       <Sheet open={openSheet} onOpenChange={() => setOpenSheet(false)}>
         <SheetTrigger asChild></SheetTrigger>
         <SheetContent className='w-3/4 px-0 mx-0'>
-          <Link
-            href={'/'}
-            className={'text-4xl font-bold px-4'}
-            onClick={() => setOpenSheet(false)}
-          >
-            Tulaganov
-          </Link>
-          <SheetDescription className='flex flex-col py-8 text-black dark:text-white'>
+          <DialogTitle className='text-4xl font-bold px-4 pb-4 border-b border-primary'>
+            <Link href={'/'} onClick={() => setOpenSheet(false)}>
+              Tulaganov
+            </Link>
+          </DialogTitle>
+          <SheetDescription className='flex flex-col text-black dark:text-white'>
             {!session?.currentUser.isAdmin
               ? navItems.map(navItem => (
                   <Link
